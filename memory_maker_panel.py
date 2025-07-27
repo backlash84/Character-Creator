@@ -177,7 +177,11 @@ class MemoryMakerPanel(ctk.CTkFrame):
                 self.save_current_memory()
 
         # Strip UI junk before copying
-        cleaned_memory = {k: v for k, v in memory.items() if not k.startswith("_")}
+        cleaned_memory = {
+            k: v
+            for k, v in memory.items()
+            if not (k.startswith("_") and not k.startswith("__"))
+        }
         self.active_memory = copy.deepcopy(cleaned_memory)
         self.last_saved_state = self.snapshot_clean_memory(self.active_memory)
 
@@ -411,7 +415,11 @@ class MemoryMakerPanel(ctk.CTkFrame):
                 return
 
         # Save file
-        to_save = {k: v for k, v in memory.items() if not k.startswith("_")}
+        to_save = {
+            k: v
+            for k, v in memory.items()
+            if not (k.startswith("_") and not k.startswith("__"))
+        }
         with open(final_path, "w", encoding="utf-8") as f:
             json.dump(to_save, f, indent=2)
 
@@ -605,7 +613,7 @@ class MemoryMakerPanel(ctk.CTkFrame):
         def clean(mem):
             result = {}
             for k, v in mem.items():
-                if not k.startswith("_"):
+                if not (k.startswith("_") and not k.startswith("__")):
                     if isinstance(v, list):
                         result[k] = [str(x).strip() for x in v]
                     elif isinstance(v, int):
@@ -643,7 +651,7 @@ class MemoryMakerPanel(ctk.CTkFrame):
         return {
             k: copy.deepcopy(v)
             for k, v in memory.items()
-            if not k.startswith("_")
+            if not (k.startswith("_") and not k.startswith("__"))
         }
 
     def update_active_memory_from_widgets(self):
