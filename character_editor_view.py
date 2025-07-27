@@ -96,7 +96,12 @@ class CharacterEditorScreen(ctk.CTkFrame):
 
     def run_finalizer(self):
         try:
-            finalize_memories(self.character_name)
-            messagebox.showinfo("Success", f"Finalization complete for {self.character_name}.")
+            base_path = os.path.dirname(self.character_path)
+            finalize_memories(self.character_name, base_path)
+            messagebox.showinfo(
+                "Success", f"Finalization complete for {self.character_name}."
+            )
         except Exception as e:
-            messagebox.showerror("Finalization Error", f"An error occurred:\n{str(e)}")
+            messagebox.showerror(
+                "Finalization Error", f"An error occurred:\n{str(e)}"
+            )
