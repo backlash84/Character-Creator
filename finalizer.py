@@ -1,9 +1,18 @@
-def finalize_memories(character_name: str, base_path: str = r"C:\Users\devli\OneDrive\Desktop\LLM character project\Character"):
-    import os
-    import json
-    import faiss
-    import numpy as np
-    from sentence_transformers import SentenceTransformer
+import os
+import json
+import faiss
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+
+DEFAULT_BASE_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "Character")
+)
+
+
+def finalize_memories(
+    character_name: str, base_path: str = DEFAULT_BASE_PATH
+):
 
     print(f"Starting finalization for character: {character_name}")
 
@@ -14,7 +23,7 @@ def finalize_memories(character_name: str, base_path: str = r"C:\Users\devli\One
 
     model_name = "all-MiniLM-L6-v2-main"
     print("Loading embedding model...")
-    model_path = r"C:\Users\devli\OneDrive\Desktop\LLM character project\Character Creator\all-MiniLM-L6-v2-main\all-MiniLM-L6-v2-main"
+    model_path = os.path.join(os.path.dirname(__file__), model_name, model_name)
     model = SentenceTransformer(model_path)
 
     # Load templates
