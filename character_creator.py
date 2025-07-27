@@ -48,8 +48,10 @@ class CharacterCreatorApp(ctk.CTk):
 
         config_path = os.path.join(character_dir, "character_config.json")
         if not os.path.exists(config_path):
-            from tkinter import messagebox
-            messagebox.showerror("Invalid Selection", "Selected folder does not contain a character_config.json.")
+            messagebox.showerror(
+                "Invalid Selection",
+                "Selected folder does not contain a character_config.json."
+            )
             return
 
         character_name = os.path.basename(character_dir)
