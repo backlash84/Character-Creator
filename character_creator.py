@@ -88,4 +88,3 @@ if __name__ == "__main__":
     ctk.set_appearance_mode("dark")  # optional
     app = CharacterCreatorApp()
     app.mainloop()
-
